@@ -33,13 +33,9 @@ export default class Turtle {
     let orient: vec3 = vec3.fromValues(0.0, 0.0, 0.0);
     let newScale: vec3 = vec3.create();
     vec3.copy(newScale, scale);
-    // vec3.add(newScale, newScale, vec3.fromValues(0.5, -0.3, 0.0));
-    //vec3.multiply( orient, this.orientation,  newScale);
-    vec3.scale(orient, this.orientation, 0.8 * newScale[1]);
+    vec3.scale(orient, this.orientation, 0.9 * newScale[1]);
 
     vec3.add(this.position, this.position, orient);
-    //this.position = this.position;
-    //vec3.add(this.position, this.position, this.orientation * 10.0);
   }
 
   rotateX(angle: number) {

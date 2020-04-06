@@ -65,7 +65,9 @@ void main()
     vec3 offset = vs_Translate;
 
     vec4 pos = vs_Pos; //vec3(vs_Pos.x, vs_Pos.y * 1.5, vs_Pos.z); // scale;
-    pos = vec4(pos[0] * vs_Scale[0], pos[1] * vs_Scale[1], pos[2] * vs_Scale[2], 1.f);
+    float scale = vs_Scale[0] * 0.8;
+    pos = vec4(pos[0] * scale, pos[1] * scale, pos[2] * scale, 1.f);
+
 
     float angleZ = vs_Orient[2];
     angleZ = angleZ * (3.1416 / 180.0);
@@ -74,9 +76,9 @@ void main()
     float angleY = vs_Orient[1];
     angleY = angleY * (3.1416 / 180.0);
 
+    
 
     pos = rotateZ(angleZ) * pos;
-    
 
     vec4 normal = vs_Nor;
     normal = rotateZ(angleZ) * normal;
@@ -87,6 +89,7 @@ void main()
     
 
     pos.xyz = pos.xyz + offset;
+
 
     pos = rotateY(angleY) * pos;
     

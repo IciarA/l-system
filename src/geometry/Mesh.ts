@@ -14,15 +14,17 @@ class Mesh extends Drawable {
 
   offsets: Float32Array; // Data for bufTranslate
   orientation: Float32Array;
-  quater: Float32Array;
+  scale: Float32Array;
 
   objString: string;
+  mesh: any;
 
-  constructor(objString: string, center: vec3) {
+  constructor(objString: string, center: vec3, mesh: any) {
     super(); // Call the constructor of the super class. This is required.
     this.center = vec4.fromValues(center[0], center[1], center[2], 1);
 
     this.objString = objString;
+    this.mesh = mesh;
   }
 
   create() {  
@@ -31,7 +33,14 @@ class Mesh extends Drawable {
     let uvsTemp: Array<number> = [];
     let idxTemp: Array<number> = [];
 
-    var loadedMesh = new Loader.Mesh(this.objString);
+    //var loadedMesh = new Loader.Mesh(('./lotus_OBJ_low.obj'));
+
+    console.log(this.mesh);
+    //let loadedMesh: any = this.mesh[this.objString];
+    var loadedMesh = new Loader.Mesh( 'OBJString' );
+    
+
+    console.log(loadedMesh);
 
     //posTemp = loadedMesh.vertices;
     for (var i = 0; i < loadedMesh.vertices.length; i++) {
@@ -64,6 +73,11 @@ class Mesh extends Drawable {
     this.generateUV();
     this.generateCol();
 
+    this.generateTranslate();
+    this.generateOrient();
+    this.generateTranslate();
+    this.generateScale();
+
     this.count = this.indices.length;
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.bufIdx);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, this.indices, gl.STATIC_DRAW);
@@ -74,8 +88,8 @@ class Mesh extends Drawable {
     gl.bindBuffer(gl.ARRAY_BUFFER, this.bufPos);
     gl.bufferData(gl.ARRAY_BUFFER, this.positions, gl.STATIC_DRAW);
 
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.bufCol);
-    gl.bufferData(gl.ARRAY_BUFFER, this.colors, gl.STATIC_DRAW);
+    //gl.bindBuffer(gl.ARRAY_BUFFER, this.bufCol);
+    //gl.bufferData(gl.ARRAY_BUFFER, this.colors, gl.STATIC_DRAW);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, this.bufUV);
     gl.bufferData(gl.ARRAY_BUFFER, this.uvs, gl.STATIC_DRAW);
@@ -84,21 +98,20 @@ class Mesh extends Drawable {
     this.objString = ""; // hacky clear
   }
 
-  setInstanceVBOs(offsets: Float32Array, colors: Float32Array, orientation: Float32Array, quaternions: Float32Array) {
+  setInstanceVBOs(offsets: Float32Array, colors: Float32Array, orientation: Float32Array, scale: Float32Array) {
     this.colors = colors;
     this.offsets = offsets;
     this.orientation = orientation;
-    this.quater = quaternions;
-
+    this.scale = scale;
 
     gl.bindBuffer(gl.ARRAY_BUFFER, this.bufCol);
-    gl.bufferData(gl.ARRAY_BUFFER, this.quater, gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, this.colors, gl.STATIC_DRAW);
     gl.bindBuffer(gl.ARRAY_BUFFER, this.bufTranslate);
     gl.bufferData(gl.ARRAY_BUFFER, this.offsets, gl.STATIC_DRAW);
     gl.bindBuffer(gl.ARRAY_BUFFER, this.bufOrientation);
     gl.bufferData(gl.ARRAY_BUFFER, this.orientation, gl.STATIC_DRAW);
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.bufQuaternion);
-    gl.bufferData(gl.ARRAY_BUFFER, this.quater, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.bufScale);
+    gl.bufferData(gl.ARRAY_BUFFER, this.scale, gl.STATIC_DRAW);
   }
 };
 

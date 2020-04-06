@@ -28,8 +28,7 @@ class Camera {
     mat4.lookAt(this.viewMatrix, this.controls.eye, this.controls.center, this.controls.up);
 
     this.position = this.controls.eye;
-    //this.up = this.controls.up;
-    this.up = vec3.fromValues(0.0, 0.0, 1.0);
+    this.up = this.controls.up;
     vec3.subtract(this.forward, this.target, this.position);
     vec3.normalize(this.forward, this.forward);
     vec3.cross(this.right, this.forward, this.up);
