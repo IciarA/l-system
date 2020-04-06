@@ -41,10 +41,7 @@ Changed color to light blue:
 
 
 ## Resources
-- https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage
-- http://iquilezles.org/www/articles/morenoise/morenoise.htm
-- http://iquilezles.org/www/articles/gradientnoise/gradientnoise.htm
-- https://thebookofshaders.com/12/
-- https://www.redblobgames.com/maps/terrain-from-noise/
-- http://web.mit.edu/cesium/Public/terrain.pdf
-- http://iquilezles.org/www/articles/warp/warp.htm
+- http://algorithmicbotany.org/papers/abop/abop-ch1.pdf
+- https://learnopengl.com/Advanced-OpenGL/Instancing
+- http://www.opengl-tutorial.org/intermediate-tutorials/billboards-particles/particles-instancing/
+- http://glmatrix.net
